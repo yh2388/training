@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 二叉树
+ * 构建二叉搜索树
  */
 public class BTree {
 
@@ -80,8 +80,8 @@ public class BTree {
         if (node == null)
             return;
         inOrderTraverse(node.getLeft());
-        System.out.print(node.getData());
         inOrderTraverse(node.getRight());
+        System.out.print(node.getData());
     }
 
     public static void main(String[] args) {

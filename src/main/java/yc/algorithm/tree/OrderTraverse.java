@@ -1,5 +1,8 @@
 package yc.algorithm.tree;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 public class OrderTraverse {
     /**
      * 中序遍历
@@ -17,15 +20,38 @@ public class OrderTraverse {
         inOrderTraverse(node.getRight());
     }
 
-    public static void main(String[] args) {
-        BTree bTree1 = new BTree();
-        bTree1.buildByLinkedList();
+    public static void levelOrderTraverse(Node<Integer> node) {
+        if(node == null) {
+            return;
+        }
+        Queue<Node<Integer>> queue = new ArrayDeque<>();
+        queue.offer(node);
+        while (!queue.isEmpty()) {
+            for (int i = 0; i < queue.size(); i++) {
+                Node<Integer> curNode = queue.poll();
+                System.out.print(curNode.getData());
+                if (curNode.getLeft() != null) {
+                    queue.offer(curNode.getLeft());
+                }
+                if (curNode.getRight() != null) {
+                    queue.offer(curNode.getRight());
+                }
+            }
+        }
+    }
 
-        // nodeList中第0个索引处的值即为根节点
-        Node<Integer> root1 = bTree1.nodeList.get(0);
-        System.out.println("中序遍历：");
-        inOrderTraverse(root1);
-        System.out.println();
+    public static void main(String[] args) {
+//        BTree bTree1 = new BTree();
+//        bTree1.buildByLinkedList();
+//
+//        // nodeList中第0个索引处的值即为根节点
+//        Node<Integer> root1 = bTree1.nodeList.get(0);
+//        System.out.println("中序遍历：");
+//        inOrderTraverse(root1);
+//        System.out.println();
+//        System.out.println("层次遍历" + root1.getData());
+//        levelOrderTraverse(root1);
+//        System.out.println();
 
 
 
@@ -36,6 +62,9 @@ public class OrderTraverse {
         Node<Integer> root2 = bTree2.root;
         System.out.println("中序遍历：");
         inOrderTraverse(root2);
+        System.out.println();
+        System.out.println("层次遍历" + root2.getData());
+        levelOrderTraverse(root2);
         System.out.println();
     }
 }
